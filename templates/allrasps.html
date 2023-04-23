@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/rasp.png" type="image/x-icon">
+    <title>Все расписания</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/password.js"></script>
+     <header class="header">
+       <h1><img class="img" src="/static/rasp.png">Расписание</h1>
+        <div class="header_links">
+            <a class="a_lnk" href="/"><h1 class="lnk">На главную</h1></a>
+            <a class="a_lnk" href="/login"><h1 class="lnk">Войти</h1></a>
+            <a class="a_lnk" href="/getapi"><h1 class="lnk">API</h1></a>
+            {% if isAdmin %}
+            <a class="a_lnk" href="/addrasp"><h1 class="lnk">Добавить</h1></a>
+            <a class="a_lnk" href="/addraspcsv"><h1 class="lnk">Добавить CSV</h1></a>
+            <a class="a_lnk" href="/help"><h1 class="lnk">Помощь</h1></a>
+            <a class="a_lnk" href="/allrasps"><h1 class="lnk_act">Все расписания</h1></a>
+            {% endif %}
+        </div>
+    </header>
+    <div id="outer">
+        <div id="center">
+            <h1 class="title">Здравствуйте,{% if isAdmin %} Администратор{% endif %} {{ name }}</h1>
+            <a href="#planned" class="a_lnk"><span style="color: lime">Перейти к запланированным</span></a> <a href="#today" class="a_lnk"><span style="color: blue">Перейти к действующим</span></a> <a href="#overdue" class="a_lnk"><span style="color: red">Перейти к просроченным</span></a>
+            <h1 id="planned" class="title" style="color: lime">Запланированные расписания</h1>
+            {% if planned != [] %}
+            {% for i in planned %}
+            {% set list_ = i.time.split('.') %}
+            {% set list_1 = i.data.split('.') %}
+            {% set list_2 = i.cabinet.split('.') %}
+            {% set list_l = list_|length %}
+            <table>
+            <thead>
+                <tr>
+                    <th colspan="3"><h2>Расписание для группы {{ i.group }}<br><br>{{ i.date }}</h2>
+                    <a href="/{{ i.path }}" class="a_lnk"><button class="csv"><img class="img-csv" src="/static/csv.png">Экспорт CSV</button></a></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td class="one"><h2>Время</h2></td>
+                    <td class="two"><h2>Класс</h2></td>
+                    <td class="three"><h2>Предмет</h2></td>
+                </tr>
+            {% for j in range(list_l) %}
+                <tr>
+                    <td class="one"><h2>{{ list_[j] }}</h2></td>
+                    <td class="two"><h2>{{ list_2[j] }}</h2></td>
+                    <td class="three"><h2>{{ list_1[j] }}</h2></td>
+                </tr>
+            {% endfor %}
+            {% if isAdmin %}
+            <tr>
+                <td class="one"><a href="/editrasp?id={{ i.id }}" class="a_lnk"><button class="edit">Редактировать</button></a></td>
+                <td class="two"><a href="/delrasp?id={{ i.id }}" class="a_lnk"><button class="delete">Удалить</button></a></td>
+                <td class="three"><a href="/editraspcsv?id={{ i.id }}" class="a_lnk"><button class="csv-edit"><img style="width: 16px; height: 16px;" src="/static/csv.png">Редактировать CSV</button></a></td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+            <br>
+            <br>
+            <br>
+            {% endfor %}
+            {% else %}
+            <h1 class="title" style="color: lime">(Нет)</h1>
+            {% endif %}
+            <h1 id="today" class="title" style="color: blue">Расписания на сегодня</h1>
+            {% if today != [] %}
+            {% for i in today %}
+            {% set list_ = i.time.split('.') %}
+            {% set list_1 = i.data.split('.') %}
+            {% set list_2 = i.cabinet.split('.') %}
+            {% set list_l = list_|length %}
+            <table>
+            <thead>
+                <tr>
+                    <th colspan="3"><h2>Расписание для группы {{ i.group }}</h2>
+                    <a href="/{{ i.path }}" class="a_lnk"><button class="csv"><img class="img-csv" src="/static/csv.png">Экспорт CSV</button></a></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td class="one"><h2>Время</h2></td>
+                    <td class="two"><h2>Класс</h2></td>
+                    <td class="three"><h2>Предмет</h2></td>
+                </tr>
+            {% for j in range(list_l) %}
+                <tr>
+                    <td class="one"><h2>{{ list_[j] }}</h2></td>
+                    <td class="two"><h2>{{ list_2[j] }}</h2></td>
+                    <td class="three"><h2>{{ list_1[j] }}</h2></td>
+                </tr>
+            {% endfor %}
+            {% if isAdmin %}
+            <tr>
+                <td class="one"><a href="/editrasp?id={{ i.id }}" class="a_lnk"><button class="edit">Редактировать</button></a></td>
+                <td class="two"><a href="/delrasp?id={{ i.id }}" class="a_lnk"><button class="delete">Удалить</button></a></td>
+                <td class="three"><a href="/editraspcsv?id={{ i.id }}" class="a_lnk"><button class="csv-edit"><img style="width: 16px; height: 16px;" src="/static/csv.png">Редактировать CSV</button></a></td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+            <br>
+            <br>
+            <br>
+            {% endfor %}
+            {% else %}
+            <h1 class="title" style="color: blue">(Нет)</h1>
+            {% endif %}
+          <h1 id="overdue" class="title" style="color: red">Просроченные расписания</h1>
+            {% if overdue != [] %}
+            {% for i in overdue %}
+            {% set list_ = i.time.split('.') %}
+            {% set list_1 = i.data.split('.') %}
+            {% set list_2 = i.cabinet.split('.') %}
+            {% set list_l = list_|length %}
+            <table>
+            <thead>
+                <tr>
+                    <th colspan="3"><h2>Расписание для группы {{ i.group }}<br><br>{{ i.date }}</h2>
+                    <a href="/{{ i.path }}" class="a_lnk"><button class="csv"><img class="img-csv" src="/static/csv.png">Экспорт CSV</button></a></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                    <td class="one"><h2>Время</h2></td>
+                    <td class="two"><h2>Класс</h2></td>
+                    <td class="three"><h2>Предмет</h2></td>
+                </tr>
+            {% for j in range(list_l) %}
+                <tr>
+                    <td class="one"><h2>{{ list_[j] }}</h2></td>
+                    <td class="two"><h2>{{ list_2[j] }}</h2></td>
+                    <td class="three"><h2>{{ list_1[j] }}</h2></td>
+                </tr>
+            {% endfor %}
+            {% if isAdmin %}
+            <tr>
+                <td class="one"><a href="/editrasp?id={{ i.id }}" class="a_lnk"><button class="edit">Редактировать</button></a></td>
+                <td class="two"><a href="/delrasp?id={{ i.id }}" class="a_lnk"><button class="delete">Удалить</button></a></td>
+                <td class="three"><a href="/editraspcsv?id={{ i.id }}" class="a_lnk"><button class="csv-edit"><img style="width: 16px; height: 16px;" src="/static/csv.png">Редактировать CSV</button></a></td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+            <br>
+            <br>
+            <br>
+            {% endfor %}
+            {% else %}
+            <h1 class="title" style="color: red">(Нет)</h1>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

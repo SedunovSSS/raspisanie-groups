@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/rasp.png" type="image/x-icon">
+    <title>API</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/password.js"></script>
+     <header class="header">
+       <h1><img class="img" src="/static/rasp.png">Расписание</h1>
+        <div class="header_links">
+            <a class="a_lnk" href="/"><h1 class="lnk">На главную</h1></a>
+            <a class="a_lnk" href="/login"><h1 class="lnk">Войти</h1></a>
+            <a class="a_lnk" href="/getapi"><h1 class="lnk_act">API</h1></a>
+            {% if isAdmin %}
+            <a class="a_lnk" href="/addrasp"><h1 class="lnk">Добавить</h1></a>
+            <a class="a_lnk" href="/addraspcsv"><h1 class="lnk">Добавить CSV</h1></a>
+            <a class="a_lnk" href="/help"><h1 class="lnk">Помощь</h1></a>
+            <a class="a_lnk" href="/allrasps"><h1 class="lnk">Все расписания</h1></a>
+            {% endif %}
+        </div>
+    </header>
+    <div style="width: 80%; margin-right: auto; margin-left: auto; color: white;">
+        <h1>Получение расписания с помощью API</h1>
+        <h1>В URL адресе есть 2 аргумента group - Группа и date - Дата</h1>
+        <img src="/static/url_api.png">
+        <h1>Если перейти на такую страницу то можно увидеть: </h1>
+        <img src="/static/api_page.png">
+        <h1>Если расписание не найдено: </h1>
+        <img src="/static/api_page_error.png">
+        <h1>Для получения расписания с помощью API будет использоваться язык Python</h1>
+        <h1>Для начала нужно установить библиотеку <a class="a_lnk" target="_blank" href="https://pypi.org/project/requests/"><p class="lnk">requests</p></a> командой pip install requests</h1><br>
+         <img src="/static/installrequests.png">
+        <h1>Дальше создадим файл api_example.py и откроем его в любом текстовом редакторе</h1>
+        <h1>В нём необходимо написать код для получения API</h1>
+        <img src="/static/api_example.png"><br>
+        <a href="/static/api_examples/api_example.py" download="/static/api_examples/api_example.py" class="a_lnk"><button class="btn-download">Скачать скрипт</button></a>
+        <h1>Переменная date отвечает за дату в формате '1999-01-01' или если нужно расписание на сегодня 'today'</h1>
+        <h1>Переменная group отвечает за группу</h1>
+        <h1>Если расписание существует, то скрипт выведет его</h1>
+        <img src="/static/api_example_success.png"><br>
+        <h1>Если расписание не существует, то скрипт выведет ошибку</h1>
+        <img src="/static/api_example_error.png"><br>
+        <h1>С помощью библиотеки Tkinter можно добавить графический интерфейс</h1>
+        <img src="/static/api_example_gui.png"><br>
+        <a href="/static/api_examples/api_example_gui.py" download="/static/api_examples/api_example_gui.py" class="a_lnk"><button class="btn-download">Скачать скрипт</button></a><br><br>
+        <img src="/static/api_example_gui_work.png"><br>
+    </div>
+</body>
+</html>

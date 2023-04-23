@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/rasp.png" type="image/x-icon">
+    <title>Редактирование</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/password.js"></script>
+ <header class="header">
+       <h1><img class="img" src="/static/rasp.png">Расписание</h1>
+        <div class="header_links">
+            <a class="a_lnk" href="/"><h1 class="lnk">На главную</h1></a>
+            <a class="a_lnk" href="/login"><h1 class="lnk">Войти</h1></a>
+            <a class="a_lnk" href="/getapi"><h1 class="lnk">API</h1></a>
+            {% if isAdmin %}
+            <a class="a_lnk" href="/addrasp"><h1 class="lnk_act">Добавить</h1></a>
+            <a class="a_lnk" href="/addraspcsv"><h1 class="lnk">Добавить CSV</h1></a>
+            <a class="a_lnk" href="/help"><h1 class="lnk">Помощь</h1></a>
+            <a class="a_lnk" href="/allrasps"><h1 class="lnk">Все расписания</h1></a>
+            {% endif %}
+        </div>
+    </header>
+    <div id="outer">
+        <div id="inner">
+            <h1 class="title">Редактировать</h1>
+           <form method="post" >
+            <div class="div_input"><input type="text" placeholder="Время" class="input" name="time" id="time" title="Время" value="{{ post.time }}"></div><br><br>
+               <div class="div_input"><input type="text" placeholder="Кабинеты" class="input" id="cab" name="cab" title="Кабинеты" value="{{ post.cabinet }}"></div><br><br>
+            <div class="div_input"><input type="text" placeholder="Предметы" class="input" id="text" name="text" title="Предметы" value="{{ post.data }}"></div><br><br>
+               <div class="div_input"><input type="text" placeholder="Группа" class="input" id="group" name="group" title="Группа" value="{{ post.group }}"></div><br><br>
+               <div class="div_input"><input class="input" type="date" name="date" value="{{ post.date }}"></div>
+            <button type="submit" class="btn" title="Add">ОТРЕДАКТИРОВАТЬ</button><br>
+           </form>
+        </div>
+    </div>
+
+</body>
+</html>

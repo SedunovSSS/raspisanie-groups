@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="shortcut icon" href="/static/rasp.png" type="image/x-icon">
+    <title>Помощь</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="/static/password.js"></script>
+ <header class="header">
+       <h1><img class="img" src="/static/rasp.png">Расписание</h1>
+        <div class="header_links">
+            <a class="a_lnk" href="/"><h1 class="lnk">На главную</h1></a>
+            <a class="a_lnk" href="/login"><h1 class="lnk">Войти</h1></a>
+            <a class="a_lnk" href="/getapi"><h1 class="lnk">API</h1></a>
+            {% if isAdmin %}
+            <a class="a_lnk" href="/addrasp"><h1 class="lnk">Добавить</h1></a>
+            <a class="a_lnk" href="/addraspcsv"><h1 class="lnk">Добавить CSV</h1></a>
+            <a class="a_lnk" href="/help"><h1 class="lnk_act">Помощь</h1></a>
+            <a class="a_lnk" href="/allrasps"><h1 class="lnk">Все расписания</h1></a>
+            {% endif %}
+        </div>
+    </header>
+    <div style="width: 80%; margin-right: auto; margin-left: auto; color: white; ">
+        <h1>Помощь в добавлении расписания</h1>
+        <ul>
+            <li><h1>Сначала перейдите на <a href="/addrasp" class="a_lnk"><p class="lnk">страницу добавления</p> </a></h1>
+            <h1>Вы увидите такую форму.</h1><br>
+                <img src="/static/form.png">
+            </li>
+            <li>
+                 <h1>Как добавлять Время, Кабинеты и Предметы?</h1>
+                 <h1>Время, Кабинеты и Предметы добавляются в формате First. Second. Third (каждый новый элемент через точку).</h1>
+                <h1>Вот так: </h1>
+                <img src="/static/form1.png">
+                <h1 style="color: red">Внимание! Время, Кабинеты и Предметы должны быть одинаковыми по количеству! Добавление расписания на одну и ту же группу в один день невозможно!</h1>
+            </li>
+            <li>
+                <h1>В поле Группа нужно вписать номер группы или класса</h1>
+            </li>
+            <li>
+                <h1>В следующем поле нужно установить дату для расписания</h1>
+            </li>
+            <li>
+                <h1>В результате должно получиться: </h1>
+                <img src="/static/form2.png">
+            </li>
+        </ul>
+        <br>
+        <br>
+        <br>
+        <br>
+        <h1 id="csv">Добавление через CSV</h1>
+        <ul>
+        <li><h1>Сначала перейдите на <a href="/addraspcsv" class="a_lnk"><p class="lnk">страницу добавления через CSV</p> </a></h1>
+            <h1>Вы увидите такую форму.</h1><br>
+                <img src="/static/form3.png">
+            </li>
+            <li>
+                <h1>Сначала вам нужен файл .CSV с расписанием</h1><br>
+                <h1>Пример такого файла можно скачать ниже:</h1>
+                <a href="/static/example.csv" class="a_lnk"><button class="csv-edit"><img style="width: 16px; height: 16px;" src="/static/csv.png">example.csv</button></a><br>
+                <h1>Если открыть этот файл в Excel то можно увидеть:</h1><br>
+                <img src="/static/csv_excel.png"><br>
+                <h1 style="color: red">Внимание! Первый ряд должен выглядеть как (Время Кабинет Предмет)! Разделителем в вашем CSV файле должна быть запятая!</h1>
+            </li>
+            </ul>
+    </div>
+</body>
+</html>
